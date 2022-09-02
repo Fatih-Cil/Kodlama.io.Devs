@@ -12,15 +12,15 @@ using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage
 {
-    public class CreateProgrammingLanguageCommand:IRequest<CreatedProgrammingLanguageDto>
+    public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageDto>
     {
         public string Name { get; set; }
 
         public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageDto>
         {
 
-           private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
-           private readonly IMapper _mapper;
+            private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
+            private readonly IMapper _mapper;
             private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
             public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules)
@@ -35,17 +35,14 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.Cre
 
 
                 await _programmingLanguageBusinessRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(request.Name);
-                
 
 
-                //Gelen istek veritabanındaki entity'e çevriliyor
+
                 ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
 
-                //veri tabanına ekleniyor ve değer dönüyor
-               ProgrammingLanguage createdProgrammingLanguage= await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
+                ProgrammingLanguage createdProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
 
-                //VT dönen değer doğrudan son kullanıcıya döndürülmesi güvenlik açığı olabileceği için istenen değerlere göre sınırlanıp mapleniyor ve bu yeni değer son kullanıcıya dönüyor. 
-                CreatedProgrammingLanguageDto createdProgrammingLanguageDto=  _mapper.Map<CreatedProgrammingLanguageDto>(createdProgrammingLanguage);
+                CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdProgrammingLanguage);
 
 
                 return createdProgrammingLanguageDto;

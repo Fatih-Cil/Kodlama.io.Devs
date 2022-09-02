@@ -37,13 +37,12 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.Upd
                 await _programmingLanguageBusinessRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenUpdated(request.Name);
 
 
-                //Gelen istek veritabanındaki entity'e çevriliyor
+                
                 ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
 
-                //veri tabanına ekleniyor ve değer dönüyor
+               
                 ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(mappedProgrammingLanguage);
 
-                //VT dönen değer doğrudan döndürülmesi güvenlik açığı olabileceği için istenen değerlere göre sınırlanıp mapleniyor ve bu yeni değer son kullanıcıya dönüyor. 
                 UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);
                 return updatedProgrammingLanguageDto;
             }

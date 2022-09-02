@@ -34,13 +34,10 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.Del
             public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
               
-                //Gelen istek veritabanındaki entity'e çevriliyor
                 ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
 
-                //veri tabanına ekleniyor ve değer dönüyor
                 ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(mappedProgrammingLanguage);
 
-                //VT dönen değer doğrudan döndürülmesi güvenlik açığı olabileceği için istenen değerlere göre sınırlanıp mapleniyor ve bu yeni değer son kullanıcıya dönüyor. 
                 DeletedProgrammingLanguageDto deletedProgrammingLanguageDto = _mapper.Map<DeletedProgrammingLanguageDto>(deletedProgrammingLanguage);
 
                 return deletedProgrammingLanguageDto;
