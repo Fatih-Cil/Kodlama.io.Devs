@@ -11,7 +11,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     where TContext : DbContext
 {
     protected TContext Context { get; }
-
+    
     public EfRepositoryBase(TContext context)
     {
         Context = context;

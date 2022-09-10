@@ -40,7 +40,7 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules
             if (programmingLanguage == null) throw new BusinessException("Request Error. Programming Language Name Not Exists.");
         }
 
-
+       
 
     }
 }
