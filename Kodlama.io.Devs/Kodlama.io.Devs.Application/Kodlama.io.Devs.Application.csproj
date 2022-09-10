@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
-    <Folder Include="Features\ProgrammingTechnologies\Commands\DeleteProgrammingTechnology\" />
-    <Folder Include="Features\ProgrammingTechnologies\Commands\UpdateProgrammingTechnology\" />
     <Folder Include="Features\ProgrammingTechnologies\Constants\" />
     <Folder Include="Features\ProgrammingTechnologies\Models\" />
     <Folder Include="Features\ProgrammingTechnologies\Queries\" />
