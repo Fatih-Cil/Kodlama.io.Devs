@@ -1,9 +1,12 @@
-﻿using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
+﻿using Core.Application.Requests;
+using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
 using Kodlama.io.Devs.Application.Features.ProgrammingTechnologies.Commands.CreateProgrammingTechnology;
 using Kodlama.io.Devs.Application.Features.ProgrammingTechnologies.Commands.DeleteProgrammingTechnology;
 using Kodlama.io.Devs.Application.Features.ProgrammingTechnologies.Commands.UpdateProgrammingTechnology;
 using Kodlama.io.Devs.Application.Features.ProgrammingTechnologies.Dtos;
+using Kodlama.io.Devs.Application.Features.ProgrammingTechnologies.Models;
+using Kodlama.io.Devs.Application.Features.ProgrammingTechnologies.Queries.GetListProgrammingTechnology;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +38,14 @@ namespace Kodlama.io.Devs.WebAPI.Controllers
             return Created("", result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        {
+            GetListProgrammingTechnologyQuery getListProgrammingTechnologyQuery = new GetListProgrammingTechnologyQuery { PageRequest = pageRequest };
+            ProgrammingTechnologiesListModel result = await Mediator.Send(getListProgrammingTechnologyQuery);
+            return Ok(result);
+
+        }
 
     }
 }
